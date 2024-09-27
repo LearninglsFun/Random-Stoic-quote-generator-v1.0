@@ -1,7 +1,6 @@
 ﻿using Random_Stoic_quotes_generator;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 
 class Program
 {
@@ -10,19 +9,19 @@ class Program
         // Create a dictionary to hold the stoics and their quotes
         Dictionary<int, Stoic> stoics = new Dictionary<int, Stoic>()
         {
-            {1, new Stoic("Marcus Aurelius", "Marcus Aurelius quotes.txt") },
-            {2, new Stoic("Cato The Younger", "Cato The Younger quotes.txt") },
-            {3, new Stoic("Diogenes", "Diogenes quotes.txt") },
-            {4, new Stoic("Epictetus", "Epictetus quotes.txt") },
-            {5, new Stoic("Seneca", "Seneca quotes.txt") },
-            {6, new Stoic("Musonius Rufus", "Musonius Rufus quotes.txt") },
-            {7, new Stoic("Marcus Tullius Cicero", "Marcus Tullius Cicero quotes.txt") },
-            {8, new Stoic("Zeno", "Zeno quotes.txt") },
+            {1, new Stoic("Marcus Aurelius", @"Quotes\Marcus Aurelius quotes.txt") },
+            {2, new Stoic("Cato The Younger", @"Quotes\Cato The Younger quotes.txt") },
+            {3, new Stoic("Diogenes", @"Quotes\Diogenes quotes.txt") },
+            {4, new Stoic("Epictetus", @"Quotes\Epictetus quotes.txt") },
+            {5, new Stoic("Seneca", @"Quotes\Seneca quotes.txt") },
+            {6, new Stoic("Musonius Rufus", @"Quotes\Musonius Rufus quotes.txt") },
+            {7, new Stoic("Marcus Tullius Cicero", @"Quotes\Marcus Tullius Cicero quotes.txt") },
+            {8, new Stoic("Zeno", @"Quotes\Zeno quotes.txt") },
         };
 
         Dictionary<int, RandomStoic> randomStoic = new Dictionary<int, RandomStoic>()
         {
-            {9, new RandomStoic("Random quote", "All quotes.txt") }
+             {9, new RandomStoic("Random quote", @"Quotes\All quotes.txt") }
         };
 
         while (true)
@@ -55,8 +54,9 @@ class Program
                 {
                     Console.Clear();
                     Console.WriteLine(randomStoic[9].GetAnyRandomQuote());
+                    Console.WriteLine("");
                     Console.WriteLine("Do you wish to get more random quotes or select a new Stoic?");
-                    Console.WriteLine("Please enter: 'same' or 'new' ");
+                    Console.WriteLine("Please enter: 'same' or 'new'. ");
 
                     while (true)
                     {
@@ -78,25 +78,20 @@ class Program
                         }
                         else if (userChoice == "same")
                         {
-
                             Console.Clear();
                             Console.WriteLine(randomStoic[9].GetAnyRandomQuote());
-                            Console.WriteLine();
+                            Console.WriteLine("");
                             Console.WriteLine("Do you wish to get more random quotes or select a new Stoic?");
                             Console.WriteLine("Please enter: 'same' or 'new'.");
                         }
                         else
                         {
-
                             Console.WriteLine("Invalid choice. Please enter: 'same' or 'new'.");
                         }
                     }
                 }
-
-
                 else if (int.TryParse(input, out choice) && stoics.ContainsKey(choice))
                 {
-
                     break; // Valid choice made, exits the loop
                 }
                 else
@@ -108,13 +103,11 @@ class Program
             // Clear the console and show a random quote
             Console.Clear();
             Console.WriteLine(stoics[choice].GetRandomQuote());
-            Console.WriteLine();
+            Console.WriteLine("");
             Console.WriteLine("Do you wish to generate another quote by the same Stoic or choose a new Stoic?");
             Console.WriteLine("Please enter: 'same' or 'new'.");
 
             // To generate a new quote from the same Stoic press enter or type new to choose a new Stoic.
-
-
             while (true)
             {
                 string userChoice = Console.ReadLine().ToLower();
@@ -126,16 +119,14 @@ class Program
                 }
                 else if (userChoice == "same")
                 {
-
                     Console.Clear();
                     Console.WriteLine(stoics[choice].GetRandomQuote());
-                    Console.WriteLine();
+                    Console.WriteLine("");
                     Console.WriteLine("Do you wish to generate another quote by the same Stoic or choose a new Stoic?");
                     Console.WriteLine("Please enter: 'same' or 'new'.");
                 }
                 else
                 {
-
                     Console.WriteLine("Invalid choice. Please enter: 'same' or 'new'.");
                 }
             }

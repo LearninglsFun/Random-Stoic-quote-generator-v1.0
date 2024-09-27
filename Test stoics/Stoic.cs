@@ -1,5 +1,4 @@
-﻿using Random_Stoic_quotes_generator;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -13,8 +12,10 @@ namespace Random_Stoic_quotes_generator
         public Stoic(string name, string filePath)
         {
             Name = name;
-            Quotes = new List<string>(File.ReadAllLines(filePath));
 
+            // Combine the base directory with the relative path to ensure correct file access
+            string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\", filePath);
+            Quotes = new List<string>(File.ReadAllLines(fullPath)); // Use fullPath here
         }
 
         public string GetRandomQuote()
@@ -24,25 +25,26 @@ namespace Random_Stoic_quotes_generator
             return $"{Quotes[index]} - {Name}";
         }
     }
-}
 
-
-public class RandomStoic
-{
-    public string Name { get; set; }
-
-    public List<string> Quotes { get; set; }
-
-    public RandomStoic(string name, string filePath)
+    public class RandomStoic
     {
-        Name = name;
-        Quotes = new List<string>(File.ReadAllLines(filePath));
-    }
+        public string Name { get; set; }
+        public List<string> Quotes { get; set; }
 
-    public string GetAnyRandomQuote()
-    {
-        Random rand = new Random();
-        int index = rand.Next(Quotes.Count);
-        return $"{Quotes[index]}";
+        public RandomStoic(string name, string filePath)
+        {
+            Name = name;
+
+            // Combine the base directory with the relative path to ensure correct file access
+            string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\", filePath);
+            Quotes = new List<string>(File.ReadAllLines(fullPath)); // Use fullPath here
+        }
+
+        public string GetAnyRandomQuote()
+        {
+            Random rand = new Random();
+            int index = rand.Next(Quotes.Count);
+            return $"{Quotes[index]}";
+        }
     }
 }
