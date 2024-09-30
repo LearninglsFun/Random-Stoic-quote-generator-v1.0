@@ -16,7 +16,18 @@ class Program
             {8, new Stoic("Zeno", @"Quotes\Zeno quotes.txt") },
         };
 
+        // This takes all quotes from the above stoics and fills them in the new random stoic class
+        List<string> allQuotes = new List<string>();
 
+        foreach(var entry in stoics)
+        {
+            foreach(var quote in entry.Value.Quotes)
+            {
+                allQuotes.Add($"{quote} - {entry.Value.Name}");
+            }
+        }
+        var randomStoic = new Stoic("Random Stoic", allQuotes);
+        stoics.Add(9, randomStoic);
 
         while (true)
         {
@@ -25,42 +36,9 @@ class Program
             {
                 Console.WriteLine($"{stoic.Key}: {stoic.Value.Name}");
             }
-            Console.WriteLine("9: Random quote from all Stoics");
-
             int choice;
             string input = Console.ReadLine();
-
-            if (input == "9")
-            {
-                Console.Clear();
-                Console.WriteLine(Stoic.RandomQuote(stoics));
-                Console.WriteLine("");
-                Console.WriteLine("Do you wish to get more random quotes or select a new Stoic?");
-                Console.WriteLine("For more quotes press enter or type 'new'.");
-
-                while (true)
-                {
-                    string userChoice = Console.ReadLine().ToLower();
-
-                    if (string.IsNullOrWhiteSpace(userChoice))
-                    {
-                        Console.Clear();
-                        Console.WriteLine(Stoic.RandomQuote(stoics));
-                        Console.WriteLine("\nFor more quotes press enter or type 'new'.");
-                        continue;
-                    }
-                    else if (userChoice == "new")
-                    {
-                        Console.Clear();
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid choice. Please enter 'new' or press enter for more quotes.");
-                    }
-                }
-            }
-            else if (string.IsNullOrEmpty(input) || !int.TryParse(input, out choice) || !stoics.ContainsKey(choice))
+            if (string.IsNullOrEmpty(input) || !int.TryParse(input, out choice) || !stoics.ContainsKey(choice))
             {
                 Console.Clear();
                 Console.WriteLine("Please enter a valid number.");
